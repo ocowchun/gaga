@@ -10,5 +10,8 @@
     "dynamodb"
   ],
   "author": "ocowchun <ocowchun@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
 }
