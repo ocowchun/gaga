@@ -1,6 +1,6 @@
 {
   "name": "gaga",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "manage configuration with dynamodb",
   "main": "index.js",
   "scripts": {
