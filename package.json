@@ -10,5 +10,13 @@
     "dynamodb"
   ],
   "author": "ocowchun <ocowchun@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "gaga": "index.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.3.14",
+    "commander": "^2.9.0",
+    "underscore": "^1.8.3"
+  }
 }
