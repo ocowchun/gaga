@@ -11,7 +11,11 @@
   ],
   "author": "ocowchun <ocowchun@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "gaga": "index.js"
+  },
   "dependencies": {
+    "aws-sdk": "^2.3.14",
     "commander": "^2.9.0"
   }
 }
