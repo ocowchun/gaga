@@ -23,8 +23,10 @@ program
     .command('show')
     .description('show config content')
     .option("-t, --table <table_name>", "Which table to get")
+    .option("-i, --id <item_id>", "Which item to get")
     .action(function(options) {
         var tableName = options.table || 'gaga_config';
+        var id = options.id || 'current';
         dynamodb.getItem(tableName).then(console.log).catch(console.log)
     });
 
@@ -32,9 +34,12 @@ program
     .command('pull')
     .description('pull config content')
     .option("-t, --table <table_name>", "Which table to get")
+    .option("-i, --id <item_id>", "Which item to get")
     .action(function(options) {
         var tableName = options.table || 'gaga_config';
-        dynamodb.getItem(tableName).then(function(data) {
+        var id = options.id || 'current';
+
+        dynamodb.getItem(tableName,id).then(function(data) {
             var fileName = 'config.json';
             var content=JSON.stringify(data, null, '\t');
             return new Promise(function(resolve, reject) {
