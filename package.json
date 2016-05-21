@@ -17,6 +17,7 @@
   "dependencies": {
     "aws-sdk": "^2.3.14",
     "commander": "^2.9.0",
+    "dynamodb-marshaler": "^2.0.0",
     "underscore": "^1.8.3"
   }
 }

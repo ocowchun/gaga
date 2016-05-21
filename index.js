@@ -7,7 +7,8 @@
 
 var program = require('commander');
 var dynamodb = require('./lib/dynamodb');
-var fs=require('fs');
+var path = require("path");
+var fs = require('fs');
 
 program
     .version('0.1.0')
@@ -27,7 +28,10 @@ program
     .action(function(options) {
         var tableName = options.table || 'gaga_config';
         var id = options.id || 'current';
-        dynamodb.getItem(tableName).then(console.log).catch(console.log)
+        dynamodb.getItem(tableName, id).then(function(data) {
+            var content = JSON.stringify(data, null, '\t');
+            console.log(content);
+        }).catch(console.log)
     });
 
 program
@@ -39,9 +43,9 @@ program
         var tableName = options.table || 'gaga_config';
         var id = options.id || 'current';
 
-        dynamodb.getItem(tableName,id).then(function(data) {
+        dynamodb.getItem(tableName, id).then(function(data) {
             var fileName = 'config.json';
-            var content=JSON.stringify(data, null, '\t');
+            var content = JSON.stringify(data, null, '\t');
             return new Promise(function(resolve, reject) {
                 fs.writeFile(fileName, content, (err) => {
                     if (err) reject(err);
@@ -51,6 +55,23 @@ program
         }).catch(console.log)
     });
 
+program
+    .command('push')
+    .description('push config content')
+    .option("-t, --table <table_name>", "Which table to push")
+    .option("-f, --file <file_name>", "Which file to push")
+    .action(function(options) {
+        var currentDir = path.resolve("./");
+        var filePath = options.file || 'config.json';
+        var fullFilePath = currentDir + '/' + filePath;
+        var tableName = options.table || 'gaga_config';
+
+        fs.readFile(fullFilePath, 'utf8', function(err, data) {
+            if (err) throw err;
+            var item = JSON.parse(data);
+            dynamodb.putItem(tableName, item).then(console.log).catch(console.log);
+        });
+    });
 
 
 program.parse(process.argv);
