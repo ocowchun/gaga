@@ -11,7 +11,7 @@ var path = require("path");
 var fs = require('fs');
 
 program
-    .version('0.1.0')
+    .version('0.1.3')
 
 program
     .command('yo')
