@@ -1,7 +1,7 @@
-#gaga
+# gaga
 >manage configuration with dynamodb
 
-##usage
+## usage
 ```bash
 #show your config content
 $ gaga show -t <your-dynamo-table> -i <item-id>
